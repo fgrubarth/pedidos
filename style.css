@@ -1,0 +1,41 @@
+h1{
+    color: aqua;
+    text-align: center;
+}
+.flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.contenedor{
+    border: 2px solid ;
+    margin: 10px;
+}
+.carro{
+   
+    
+    width: 50%;
+}
+.pedidos{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.magia{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.imgCarro{
+    width: 100px;
+    height: 70px;
+}
+
+.imagenCarro {
+    max-width: 80px;
+    border-radius: 20px;
+  }
