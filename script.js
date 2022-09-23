@@ -1,4 +1,38 @@
-const agregar = document.querySelectorAll('.btn');
+// const productos = [
+//   {
+//     id: "1",
+//     title: "hamburguesa",
+//     price: 1200,
+//     image: "hambu.jpg"
+//   },
+//   {
+//     id: "2",
+//     title: "empanada",
+//     price: 70,
+//     image: "empanada.jpg"
+//   },
+//   {
+//     id: "3",
+//     title: "pizza",
+//     price: 1300,
+//     image: "pizza.jpg"
+//   },
+//   {
+//     id: "4",
+//     title: "lomito",
+//     price: 1500,
+//     image: "lomito.jpg"
+//   }
+// ]
+
+// let titulo;
+// let precio;
+// let imagen;
+// let agregar = document.querySelectorAll("agregar");
+// console.log(agregar)
+
+
+const agregar = document.querySelectorAll('#agregar');
 agregar.forEach((agregarPedido) => {
   agregarPedido.addEventListener('click', hacerClick);
 });
@@ -19,7 +53,24 @@ const magia = document.querySelector(
   }
 
   function agregarCart(itemTitulo, itemPrecio, itemImagen){
-    const div = document.createElement('div');
+    const elementsTitle = magia.getElementsByClassName(
+      'itemCompraTitulo'
+    );
+    for (let i = 0; i < elementsTitle.length; i++) {
+      if (elementsTitle[i].innerText === itemTitulo) {
+        let elementQuantity = elementsTitle[
+          i
+        ].parentElement.parentElement.parentElement.querySelector(
+          '.itemCompraCantidad'
+        );
+        elementQuantity.value++;
+        aumentarPrecio();
+        return;
+      }
+    }
+
+
+  const div = document.createElement('div');
   const pedido = `<div class="row itemCompra">
   <div class="col-6">
       <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
@@ -36,7 +87,7 @@ const magia = document.querySelector(
       <div
           class=" d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">
           <input class="itemCompraCantidad" type="number"
-              value="1" min="1">
+              value="1">
           <button class="btn btn-danger borrar" type="button">X</button>
       </div>
   </div>
@@ -46,6 +97,9 @@ magia.append(div);
 
 div.querySelector(".borrar").addEventListener("click", borrar)
 
+div.querySelector('.itemCompraCantidad').addEventListener('change', cambiarCantidad);
+// actualizarProductosStorage()
+// obtenerProductosStorage()
 aumentarPrecio();
 }
 
@@ -79,6 +133,12 @@ function aumentarPrecio(){
 
 }
 
+function cambiarCantidad(event) {
+  const input = event.target;
+  input.value <= 0 ? (input.value = 1) : null;
+  aumentarPrecio();
+}
+
 function borrar(event){
   const botonBorrar = event.target
   botonBorrar.closest('.itemCompra').remove();
@@ -86,6 +146,16 @@ function borrar(event){
 
 }
 
+function actualizarProductosStorage() {
+  let productosJSON = JSON.stringify(agregar);
+  localStorage.setItem("agregar", productosJSON);
+}
 
-
+function obtenerProductosStorage() {
+  let productosJSON = localStorage.getItem("agregar");
+  if (productosJSON) {
+    agregar = JSON.parse(productosJSON);
+    agregarCart();
+  }
+}
 
