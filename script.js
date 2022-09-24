@@ -146,16 +146,16 @@ function borrar(event){
 
 }
 
-function actualizarProductosStorage() {
-  let productosJSON = JSON.stringify(agregar);
-  localStorage.setItem("agregar", productosJSON);
-}
+// function actualizarProductosStorage() {
+//   let productosJSON = JSON.stringify("agregar");
+//   localStorage.setItem("agregar", productosJSON);
+// }
 
-function obtenerProductosStorage() {
-  let productosJSON = localStorage.getItem("agregar");
-  if (productosJSON) {
-    agregar = JSON.parse(productosJSON);
-    agregarCart();
-  }
-}
+// function obtenerProductosStorage() {
+//   let productosJSON = localStorage.getItem("agregar");
+//   if (productosJSON) {
+//     agregar = JSON.parse(productosJSON);
+//     agregarCart();
+//   }
+// }
 
