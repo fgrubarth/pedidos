@@ -61,14 +61,7 @@ for (let i = 0; i < productos.length; i++) {
     productos[i].id +
     "'>Añadir</button>";
 
-  //   menu = `<div class="card" style="width: 18rem;">
-  //   <img src=imagenes/${productos[i].image} class="card-img-top" alt="...">
-  //   <div class="card-body">
-  //     <h5 class="card-title">${productos[i].title}</h5>
-  //     <p class="card-text">${productos[i].price}</p>
-  //     <button onClick='agregar(${productos[i].id}) id=${productos[i].id} class="btn btn-primary">Añadir</button>
-  //   </div>
-  // </div>`;
+
 }
 
 div2.innerHTML = menu;
@@ -96,7 +89,11 @@ function agregar(event) {
     ); 
 
 chacho.push(producto)
+
+// pintar() 
+
     }
+
   agregarCart(itemId, itemTitulo, itemPrecio, itemImagen);
 }
 function agregarCart(itemId, itemTitulo, itemPrecio, itemImagen) {
@@ -114,23 +111,25 @@ function agregarCart(itemId, itemTitulo, itemPrecio, itemImagen) {
     }
   }
 
-  pintar(itemId, itemTitulo, itemPrecio, itemImagen)
+  
   actualizarProductosStorage();
   obtenerProductosStorage();
   aumentarPrecio();
 }
-function pintar(itemId, itemTitulo, itemPrecio, itemImagen){
-const div = document.createElement("div");
-  const pedido = `<div class="row itemCompra">
+function pintar(){
+  magia.innerHTML="";
+  chacho.forEach((producto) => {
+let div = document.createElement("div");
+  div.innerHTML = `<div class="row itemCompra">
   <div class="col-6">
       <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
-          <img src=imagenes/${itemImagen} class="imagenCarro">
-          <h6 class="itemCompraTitulo text-truncate ml-3 mb-0"> ${itemTitulo}</h6>
+          <img src=imagenes/${producto.itemImagen} class="imagenCarro">
+          <h6 class="itemCompraTitulo text-truncate ml-3 mb-0"> ${producto.itemTitulo}</h6>
       </div>
   </div>
   <div class="col-2">
       <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
-          <p class="itemCompraPrecio mb-0 ">$${itemPrecio}</p>
+          <p class="itemCompraPrecio mb-0 ">$${producto.itemPrecio}</p>
       </div>
   </div>
   <div class="col-4">
@@ -138,18 +137,21 @@ const div = document.createElement("div");
           class=" d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">
           <input class="itemCompraCantidad" type="number"
               value="1">
-          <button class="ml-2 btn btn-danger borrar" id="botonEliminar-${itemId.id}" type="button">X</button>
+          <button class="ml-2 btn btn-danger borrar" id="botonEliminar-${producto.id}" type="button">X</button>
       </div>
   </div>
 </div>`;
-  div.innerHTML = pedido;
+  
   magia.append(div);
 
-  div.querySelector(".borrar").addEventListener("click", borrar);
+  div.querySelector(`#botonEliminar-${producto.id}`).addEventListener("click", borrar);
+  // let botonEliminar = document.getElementById(`botonEliminar-${itemId.id}`);
+  //   botonEliminar.onclick = () => borrar(itemId.id);
 
   div
     .querySelector(".itemCompraCantidad")
     .addEventListener("change", cambiarCantidad);
+})
 }
 
 function aumentarPrecio() {
@@ -180,6 +182,14 @@ function cambiarCantidad(event) {
 function borrar(event) {
   const botonBorrar = event.target;
   botonBorrar.closest(".itemCompra").remove();
+  // let columnaBorrar = document.getElementById(`columna-${itemId}`);
+  // let indiceBorrar = productos.findIndex(
+  //   (producto) => Number(producto.id) === Number(itemId)
+  // );
+
+  // chacho.splice(indiceBorrar, 1);
+  // columnaBorrar.remove()
+
   actualizarProductosStorage()
   aumentarPrecio();
 }
