@@ -50,19 +50,19 @@
       <hr />
     <h1>Pedidos</h1>
     <div class="flex">
-        <div class="pedir">
-            <h2>hola</h2>
-            <div class="contenedor">
+        <div class="pedir" id="lista-productos">
+
+            <div class="contenedor" >
                 
-                <p class="titulo">Hamburguesa</p>
-                <img class="foto" src="imagenes/hambu.jpg" alt="hamburguesa">
-                
-                <p class="precio">
-                    $1200
-                </p>
-                
-                <button type="submit" id="agregar" class="btn btn-primary agregar-carrito">Añadir</button>
-                
+                    <h4 class="titulo">Hamburguesa</h4>
+                    <img class="foto" src="imagenes/hambu.jpg" alt="hamburguesa">
+                    
+                    <p class="precio">
+                        $1200
+                    </p>
+                    
+                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" >Añadir</button>
+        
             </div>
 
             <div class="contenedor">
@@ -74,7 +74,7 @@
                     $70
                 </div>
                 <div>
-                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito">Añadir</button>
+                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="2">Añadir</button>
                 </div>
             </div>
 
@@ -87,7 +87,7 @@
                     $1300
                 </div>
                 <div>
-                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito">Añadir</button>
+                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="3">Añadir</button>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
                     $1500
                 </div>
                 <div>
-                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito">Añadir</button>
+                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="4">Añadir</button>
                 </div>
             </div>
 
@@ -152,6 +152,8 @@
 <!-- js -->
 
 
-<script src="script.js"></script>  
+<script src="./js/script.js"></script>
+<script src="./js/carro.js"></script> 
+
 </body>
 </html>

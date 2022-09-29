@@ -37,28 +37,77 @@
 class carrito{
   //para añadir al carrito
       comprarProducto(e){
-        e.preventDefault();
+        
         //Delegado para agregar al carrito
         if(e.target.classList.contains('agregar-carrito')){
-            const producto = e.target.parentElement.parentElement.parentElement;
+            const producto = e.target.parentElement.parentElement;
             //Enviamos el producto seleccionado para tomar sus datos
-            // this.leerDatosProducto(producto);
-            console.log(producto)
+            this.leerDatosProducto(producto);
         }
 }
-}
-const carro = new carrito()
-const magia = document.querySelector('.magia');
-const productos = document.getElementsByClassName("pedir")
 
-
-cargarEventos();
-
-function cargarEventos(){
-
-    //Se ejecuta cuando se presionar agregar carrito
-    productos.
+leerDatosProducto(producto){
+  const infoProducto = {
+    imagen : producto.querySelector("img").src,
+    titulo : producto.querySelector("h4").textContent,
+    precio : producto.querySelector("p").textContent,
+    id : producto.querySelector("button").getAttribute('data-id'),
+    cantidad : 1
   }
+  
+  // let productosLS;
+  // productosLS = this.obtenerProductosLocalStorage();
+  // productosLS.foreach(function(productosLS){
+  //   if(productosLS.id === infoProducto.id){
+  //     productosLS = productosLS.id;
+  //   }
+  // });
+  // if(productosLS === infoProducto.id){
+
+
+  // }
+  // else {
+    this.insertarCarrito(infoProducto);
+  // }
+
+}
+
+insertarCarrito(producto){
+    const div = document.createElement('div');
+  const pedido = `<div class="row itemCompra">
+  <div class="col-6">
+      <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+          <img src=${producto.imagen} class="imagenCarro">
+          <h6 class="itemCompraTitulo text-truncate ml-3 mb-0">${producto.titulo}</h6>
+      </div>
+  </div>
+  <div class="col-2">
+      <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+          <p class="itemCompraPrecio mb-0 ">${producto.precio}</p>
+      </div>
+  </div>
+  <div class="col-4">
+      <div
+          class=" d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">
+          <input class="itemCompraCantidad" type="number"
+              value="1">
+          <button class="btn btn-danger borrar" type="button">X</button>
+      </div>
+  </div>
+</div>`
+div.innerHTML = pedido;
+magia.append(div);
+ 
+
+}
+
+
+}
+
+
+
+
+
 
 
 
