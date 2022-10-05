@@ -7,153 +7,147 @@
     <title>Hacer Pedidos</title>
     <!-- link css -->
     <link rel="stylesheet" href="style.css">
+
+   
+  
     <!--lick boot -->
     
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
-    <div class="row">
-        <div class="col-md-6">
-          <button class="btn btn-warning" id="limpiarStorage">
-            Limpiar Storage
-          </button>
-        </div>
-        <div class="col-md-6">
-          <div id="contenedorUsuario" hidden>
-            <p id="textoUsuario">Bienvenido:</p>
-          </div>
-          <div id="contenedorIdentificacion">
-            <h2>Identificate</h2>
-            <form id="formularioIdentificacion">
-              <div class="row">
-                <div class="col-md-8">
-                  <div>
-                    <label class="form-label">Nombre</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputUsuario"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-4 d-flex align-items-end">
-                  <button type="submit" class="btn btn-secondary">
-                    Identificarse
-                  </button>
-                </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-warning" id="limpiarStorage">
+        Limpiar Storage
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div id="contenedorUsuario" hidden>
+        <p id="textoUsuario">Bienvenido:</p>
+      </div>
+      <div id="contenedorIdentificacion">
+        <h2>Identificate</h2>
+        <form id="formularioIdentificacion">
+          <div class="row">
+            <div class="col-md-8">
+              <div>
+                <label class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputUsuario"
+                  required
+                />
               </div>
-            </form>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+              <button type="submit" class="btn btn-secondary">
+                Identificarse
+              </button>
+            </div>
           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    <hr />
+  <h1>Pedidos</h1>
+  <div class="flex">
+    <div class="pedir" id="lista-productos">
+
+      <div class="contenedor" >
+        <h4 class="titulo">Hamburguesa</h4>
+        <img class="foto" src="imagenes/hambu.jpg" alt="hamburguesa">
+        <p class="precio">
+            1200
+        </p>
+        <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="1">Añadir</button>
+      </div>
+
+      <div class="contenedor">
+        <div>
+            <h4 class="titulo">Empanada</h4>
+            <img class="foto" src="imagenes/empanada.jpg" alt="empanada">
+        </div>
+        <p class="precio">
+            70
+        </p>
+        <div>
+            <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="2">Añadir</button>
         </div>
       </div>
-      <hr />
-    <h1>Pedidos</h1>
-    <div class="flex">
-        <div class="pedir" id="lista-productos">
 
-            <div class="contenedor" >
-                
-                    <h4 class="titulo">Hamburguesa</h4>
-                    <img class="foto" src="imagenes/hambu.jpg" alt="hamburguesa">
-                    
-                    <p class="precio">
-                        $1200
-                    </p>
-                    
-                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" >Añadir</button>
-        
-            </div>
-
-            <div class="contenedor">
-                <div>
-                    <p class="titulo">Empanada</p>
-                    <img class="foto" src="imagenes/empanada.jpg" alt="empanada">
-                </div>
-                <div class="precio">
-                    $70
-                </div>
-                <div>
-                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="2">Añadir</button>
-                </div>
-            </div>
-
-            <div class="contenedor">
-                <div>
-                    <p class="titulo">Pizza</p>
-                    <img class="foto" src="imagenes/pizza.jpg" alt="pizza">
-                </div>
-                <div class="precio">
-                    $1300
-                </div>
-                <div>
-                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="3">Añadir</button>
-                </div>
-            </div>
-
-            <div class="contenedor">
-                <div>
-                    <p class="titulo">Lomito</p> 
-                    <img class="foto" src="imagenes/lomito.jpg" alt="lomito">
-                </div>
-                <div class="precio">
-                    $1500
-                </div>
-                <div>
-                    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="4">Añadir</button>
-                </div>
-            </div>
-
+      <div class="contenedor">
+        <div>
+            <h4 class="titulo">Pizza</h4>
+            <img class="foto" src="imagenes/pizza.jpg" alt="pizza">
         </div>
-
-        <div class="carro">
-            <h2>chau</h2>
-            <div class="pedidos">
-                <div>
-                    <h3>Producto </h3>
-                </div>
-                <div>
-                    <h3>Precio</h3>
-                </div>
-                <div>
-                    <h3>Cantidad</h3>
-                </div>
-            </div>
-
-            <div class="magia">
-                
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div >
-                        <p class="mb-0">Total</p>
-                        <p class="ml-4 mb-0 precioTotales">$0</p>
-                        <button class="btn btn-success ml-auto comprarButton" type="button" data-toggle="modal"
-                            data-target="#comprarModal">Comprar</button>
-                    </div>
-                </div>
-            </div>
-
-  
+        <p class="precio">
+            1300
+        </p>
+        <div>
+            <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="3">Añadir</button>
         </div>
+      </div>
 
-        
-
-
-    
+      <div class="contenedor">
+          <div>
+              <h4 class="titulo">Lomito</h4> 
+              <img class="foto" src="imagenes/lomito.jpg" alt="lomito">
+          </div>
+          <p class="precio">
+              1500
+          </p>
+          <div>
+              <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id="4">Añadir</button>
+          </div>
+      </div>
 
     </div>
-    
 
+    <div id="carrito" class="form-group table-responsive" >
+      <table class="table" id="lista-compra" >
+        <thead>
+          <tr>
+              <th scope="col">Imagen</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Sub Total</th>
+              <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody >
 
-<!-- boot js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-<!-- js -->
+        </tbody>
+          
+        <tr>
+          <th colspan="4" scope="col" class="text-right">TOTAL :</th>
+          <th scope="col">
+              <input id="total" name="monto" class="font-weight-bold border-0" readonly style="background-color: white;"></input>
+          </th>
+        </tr>
 
+      </table>
+      <div class="row justify-content-between">
 
-<script src="./js/script.js"></script>
-<script src="./js/carro.js"></script> 
+        <div class="d-flex justify-content-between">
+              <a href="#" id="vaciar-carrito" class="btn btn-primary ">Vaciar Carrito</a>
+              <button href="#" class="btn btn-success btn-block" id="procesar-compra">Realizar compra</button>
+        </div>
+                            
+      </div>
+    </div>
+
+  </div>
+
+  <!-- boot js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  <!-- js -->
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.37/dist/sweetalert2.all.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/carro.js"></script> 
 
 </body>
 </html>

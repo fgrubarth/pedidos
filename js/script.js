@@ -1,40 +1,10 @@
-// const productos = [
-//   {
-//     id: "1",
-//     title: "hamburguesa",
-//     price: 1200,
-//     image: "hambu.jpg"
-//   },
-//   {
-//     id: "2",
-//     title: "empanada",
-//     price: 70,
-//     image: "empanada.jpg"
-//   },
-//   {
-//     id: "3",
-//     title: "pizza",
-//     price: 1300,
-//     image: "pizza.jpg"
-//   },
-//   {
-//     id: "4",
-//     title: "lomito",
-//     price: 1500,
-//     image: "lomito.jpg"
-//   }
-// ]
-
-// let titulo;
-// let precio;
-// let imagen;
-// let agregar = document.querySelectorAll("agregar");
-// console.log(agregar)
 
 
 
 
-class carrito{
+
+
+class carritos{
   //para añadir al carrito
       comprarProducto(e){
         
@@ -43,6 +13,7 @@ class carrito{
             const producto = e.target.parentElement.parentElement;
             //Enviamos el producto seleccionado para tomar sus datos
             this.leerDatosProducto(producto);
+            
         }
 }
 
@@ -54,186 +25,262 @@ leerDatosProducto(producto){
     id : producto.querySelector("button").getAttribute('data-id'),
     cantidad : 1
   }
-  
-  // let productosLS;
-  // productosLS = this.obtenerProductosLocalStorage();
-  // productosLS.foreach(function(productosLS){
-  //   if(productosLS.id === infoProducto.id){
-  //     productosLS = productosLS.id;
-  //   }
-  // });
-  // if(productosLS === infoProducto.id){
-
-
-  // }
-  // else {
+  let productosLS;
+  productosLS = this.obtenerProductosLocalStorage();
+  productosLS.forEach(function(productoLS){
+    if(productoLS.id === infoProducto.id){
+      productosLS = productoLS.id;
+    }
+  });
+  if(productosLS === infoProducto.id){
+    Swal.fire({
+      type: 'info',
+      title: 'Oops...',
+      text: 'El producto ya está agregado',
+      showConfirmButton: false,
+      timer: 1000
+  })
+  }
+  else {
     this.insertarCarrito(infoProducto);
-  // }
-
+    this.calcularTotal();
+  }
 }
+
 
 insertarCarrito(producto){
-    const div = document.createElement('div');
-  const pedido = `<div class="row itemCompra">
-  <div class="col-6">
-      <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
-          <img src=${producto.imagen} class="imagenCarro">
-          <h6 class="itemCompraTitulo text-truncate ml-3 mb-0">${producto.titulo}</h6>
-      </div>
-  </div>
-  <div class="col-2">
-      <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
-          <p class="itemCompraPrecio mb-0 ">${producto.precio}</p>
-      </div>
-  </div>
-  <div class="col-4">
-      <div
-          class=" d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">
-          <input class="itemCompraCantidad" type="number"
-              value="1">
-          <button class="btn btn-danger borrar" type="button">X</button>
-      </div>
-  </div>
-</div>`
-div.innerHTML = pedido;
-magia.append(div);
- 
+  const row = document.createElement('tr');
+  row.innerHTML = `
+      <td>
+          <img src="${producto.imagen}" width=100>
+      </td>
+      <td>${producto.titulo}</td>
+      <td>${producto.precio}</td>
+      <td>
+      <input type="number" class="form-control cantidad" min="1" value=${producto.cantidad}>
+      </td>
+      <td id='subtotales'>${producto.precio * producto.cantidad}</td>
+      <td>
+         <a href="#" class="borrar-producto fas fa-times-circle" style="font-size:30px" data-id="${producto.id}">X</a>
+      </td>
+      </td>
+  `;
+  listaCompra.appendChild(row);
+  
+  this.guardarProductosLocalStorage(producto);
 
 }
 
+ //Eliminar el producto del carrito en el DOM
+ eliminarProducto(e){
+  
+  let producto, productoID;
+  if(e.target.classList.contains('borrar-producto')){
+      e.target.parentElement.parentElement.remove();
+      producto = e.target.parentElement.parentElement;
+      productoID = producto.querySelector('a').getAttribute('data-id');
+  }
+  this.eliminarProductoLocalStorage(productoID);
+  this.calcularTotal();
 
 }
+//almacenar en ls
+guardarProductosLocalStorage(producto){
+  let productos;
+  //Toma valor de un arreglo con datos del LS
+  productos = this.obtenerProductosLocalStorage();
+  //Agregar el producto al carrito
+  productos.push(producto);
+  //Agregamos al LS
+  localStorage.setItem('productos', JSON.stringify(productos));
+}
+//Comprobar que hay elementos en el LS
+obtenerProductosLocalStorage(){
+  let productoLS;
 
+  //Comprobar si hay algo en LS
+  if(localStorage.getItem('productos') === null){
+      productoLS = [];
+  }
+  else {
+      productoLS = JSON.parse(localStorage.getItem('productos'));
+  }
+  return productoLS;
 
-
-
-
-
-
-
-// const agregar = document.querySelectorAll('#agregar');
-// agregar.forEach((agregarPedido) => {
-//   agregarPedido.addEventListener('click', hacerClick);
-// });
-
-// const magia = document.querySelector(
-//     '.magia'
-//   );
-  
-//   function hacerClick(event) {
-//     const boton = event.target;
-//     const item = boton.closest('.contenedor');
-  
-//     const itemTitulo = item.querySelector('.titulo').textContent;
-//     const itemPrecio = item.querySelector('.precio').textContent;
-//     const itemImagen = item.querySelector('.foto').src;
+}
+//Eliminar producto por ID del LS
+eliminarProductoLocalStorage(productoID){
+    let productosLS;
+    //Obtenemos el arreglo de productos
+    productosLS = this.obtenerProductosLocalStorage();
+    //Comparar el id del producto borrado con LS
+    productosLS.forEach(function(productoLS, index){
+        if(productoLS.id === productoID){
+            productosLS.splice(index, 1);
+        }
+    })
+    localStorage.setItem('productos', JSON.stringify(productosLS)); 
     
-//     agregarCart(itemTitulo, itemPrecio, itemImagen);
-//   }
+  }
 
-//   function agregarCart(itemTitulo, itemPrecio, itemImagen){
-//     const elementsTitle = magia.getElementsByClassName(
-//       'itemCompraTitulo'
-//     );
-//     for (let i = 0; i < elementsTitle.length; i++) {
-//       if (elementsTitle[i].innerText === itemTitulo) {
-//         let elementQuantity = elementsTitle[
-//           i
-//         ].parentElement.parentElement.parentElement.querySelector(
-//           '.itemCompraCantidad'
-//         );
-//         elementQuantity.value++;
-//         aumentarPrecio();
-//         return;
-//       }
-//     }
+ //Mostrar los productos guardados en el LS
+ leerLocalStorage(){
+  let productosLS;
+  productosLS = this.obtenerProductosLocalStorage();
+  productosLS.forEach(function (producto){
+      const row = document.createElement('tr');
+      row.innerHTML = `
+          <td>
+              <img src="${producto.imagen}" width=100>
+          </td>
+          <td>${producto.titulo}</td>
+          <td>${producto.precio}</td>
+          <td>
+              <input type="number" class="form-control cantidad" min="1" value=${producto.cantidad}>
+          </td>
+          <td id='subtotales'>${producto.precio * producto.cantidad}</td>
+          <td>
+            <a href="#" class="borrar-producto fas fa-times-circle" style="font-size:30px" data-id="${producto.id}">X</a>
+          </td>
+      `;
+      listaCompra.appendChild(row);
+  });
+ 
+}
 
+ //Calcular montos
+calcularTotal(){
+    let productosLS;
+    let total = 0;
+    productosLS = this.obtenerProductosLocalStorage();
+    for(let i = 0; i < productosLS.length; i++){
+        let element = Number(productosLS[i].precio * productosLS[i].cantidad);
+        total = total + element;
+        
+    }
+    
+    montoTotal.value = "$" + total;
+}
+obtenerEvento(e) {
+  e.preventDefault();
+  let id, cantidad, producto, productosLS;
+  if (e.target.classList.contains('cantidad')) {
+      producto = e.target.parentElement.parentElement;
+      id = producto.querySelector('a').getAttribute('data-id');
+      cantidad = producto.querySelector('input').value;
+      let actualizarMontos = document.querySelectorAll('#subtotales');
+      productosLS = this.obtenerProductosLocalStorage();
+      productosLS.forEach(function (productoLS, index) {
+          if (productoLS.id === id) {
+              productoLS.cantidad = cantidad;                    
+              actualizarMontos[index].innerHTML = Number(cantidad * productosLS[index].precio);
+          }    
+      });
+      localStorage.setItem('productos', JSON.stringify(productosLS));
+  }
 
-//   const div = document.createElement('div');
-//   const pedido = `<div class="row itemCompra">
-//   <div class="col-6">
-//       <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
-//           <img src=${itemImagen} class="imagenCarro">
-//           <h6 class="itemCompraTitulo text-truncate ml-3 mb-0">${itemTitulo}</h6>
-//       </div>
-//   </div>
-//   <div class="col-2">
-//       <div class=" d-flex align-items-center h-100 border-bottom pb-2 pt-3">
-//           <p class="itemCompraPrecio mb-0 ">${itemPrecio}</p>
-//       </div>
-//   </div>
-//   <div class="col-4">
-//       <div
-//           class=" d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">
-//           <input class="itemCompraCantidad" type="number"
-//               value="1">
-//           <button class="btn btn-danger borrar" type="button">X</button>
-//       </div>
-//   </div>
-// </div>`
-// div.innerHTML = pedido;
-// magia.append(div);
+}
+ procesarCompra() {
+  // e.preventDefault();
+  if (carro.obtenerProductosLocalStorage().length === 0) {
+      Swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: 'No hay productos, selecciona alguno',
+          showConfirmButton: false,
+          timer: 2000
+      })
+} else{
+  Swal.fire({
+    title: '¿Estas seguro que quieres realidar la compra?',
+    text: "",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Comprar '
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Compra exitosa',
+        'Muchas gracias',
+        'success'
+      )
+      this.vaciarLocalStorage()
+    }
+  })
+}
+}
 
-// div.querySelector(".borrar").addEventListener("click", borrar)
+ //Elimina todos los productos
+ vaciarCarrito(){
+  if (carro.obtenerProductosLocalStorage().length === 0) {
+    Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'No hay productos para borrar',
+        showConfirmButton: false,
+        timer: 2000
+    })
+}else{
+    Swal.fire({
+      title: '¿Estas seguro que quieres borrar el carrito?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Comprar '
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Carrito borrado',
+          "",
+          'success'
+        )
+        this.vaciarLocalStorage()
+      }
+    })
+ }
+  }
 
-// div.querySelector('.itemCompraCantidad').addEventListener('change', cambiarCantidad);
-// // actualizarProductosStorage()
-// // obtenerProductosStorage()
-// aumentarPrecio();
+ //Eliminar todos los datos del LS
+ vaciarLocalStorage(){
+  localStorage.clear();
+  listaCompra.innerHTML="";
+  this.calcularTotal()
+  }
+
+ //usuario
+//  identificarUsuario(e){
+//   e.preventDefault()
+//   usuario = inputUsuario.value;
+//   formularioIdentificacion.reset();
+//   this.actualizarUsuarioStorage();
+//   this.mostrarTextoUsuario();
+//  }
+//  actualizarUsuarioStorage() {
+//   localStorage.setItem("usuario", usuario);
+// }
+//  mostrarTextoUsuario() {
+//   contenedorIdentificacion.hidden = true;
+//   contenedorUsuario.hidden = false;
+//   textoUsuario.innerHTML += ` ${usuario}`;
+// }
+//  mostrarFormularioIdentificacion() {
+//   contenedorIdentificacion.hidden = false;
+//   contenedorUsuario.hidden = true;
+//   textoUsuario.innerHTML = ``;
 // }
 
-// function aumentarPrecio(){
-//   let total= 0;
-//   const precioTotal = document.querySelector('.precioTotales');
-  
-//   const itemCompras = document.querySelectorAll('.itemCompra')
-  
-  
-//   itemCompras.forEach((itemCompra) => {
-//     const itemPrecioTotal = itemCompra.querySelector(
-//       '.itemCompraPrecio'
-      
-//     );
-   
-//   const precio = itemPrecioTotal.textContent.replace("$", "");
-//   console.log(precio)
-  
-//   const cantidadTotal = itemCompra.querySelector(
-//     '.itemCompraCantidad'
-//   );
-  
-//   const itemCompraCantidad = 
-//     cantidadTotal.value;
-//     console.log(itemCompraCantidad)
-//   total = total + precio * itemCompraCantidad;
-//   console.log(total)
-//   });
-//   precioTotal.innerHTML = `$${total.toFixed(0)}`;
 
-// }
 
-// function cambiarCantidad(event) {
-//   const input = event.target;
-//   input.value <= 0 ? (input.value = 1) : null;
-//   aumentarPrecio();
-// }
+}
 
-// function borrar(event){
-//   const botonBorrar = event.target
-//   botonBorrar.closest('.itemCompra').remove();
-//   aumentarPrecio();
 
-// }
 
-// function actualizarProductosStorage() {
-//   let productosJSON = JSON.stringify(agregar);
-//   localStorage.setItem("agregar", productosJSON);
-// }
 
-// function obtenerProductosStorage() {
-//   let productosJSON = localStorage.getItem("agregar");
-//   if (productosJSON) {
-//     agregar = JSON.parse(productosJSON);
-//     agregarCart();
-//   }
-// }
+
+
+
+
