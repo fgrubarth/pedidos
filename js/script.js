@@ -1,19 +1,51 @@
 
 
+ //pintar dom
+ async function consultarProductosServer(){
+  try {
+    const response = await fetch(
+      "https://633f1c0883f50e9ba3bfe80f.mockapi.io/api/comidas"
+    );
+    const data = await response.json();
+    productes = [...data];
+    pintarDom()
+  } catch{
+    console.log("error");
+  }
+}
+function pintarDom(){
+  
+    for (let i = 0; i < productes.length; i++){
+    const row = document.createElement('div');
+    row.innerHTML = `
+    <h4 class="titulo">${productes[i].titulo}</h4>
+    <img class="foto" src="imagenes/${productes[i].imagen}" alt="${productes[i].titulo}">
+    <p class="precio">
+    ${productes[i].precio}
+    </p>
+    <button type="submit" id="agregar" class="btn btn-primary agregar-carrito" data-id=${productes[i].id}>Añadir</button>
+    `;
+    magia2.appendChild(row);}
+;
 
+}
 
+consultarProductosServer();
 
 
 class carritos{
+ 
+     
+  
+
   //para añadir al carrito
       comprarProducto(e){
         
         //Delegado para agregar al carrito
         if(e.target.classList.contains('agregar-carrito')){
-            const producto = e.target.parentElement.parentElement;
+            const producto = e.target.parentElement;
             //Enviamos el producto seleccionado para tomar sus datos
             this.leerDatosProducto(producto);
-            
         }
 }
 

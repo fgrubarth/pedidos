@@ -4,19 +4,9 @@ const carrito = document.getElementById('carrito');
 const productos = document.getElementById('lista-productos');
 const procesarCompraBtn = document.getElementById('procesar-compra');
 const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
-let limpiarStorage = document.getElementById("limpiarStorage")
 let montoTotal = document.getElementById('total')
-
-// para usuario
-let usuario;
-let formularioIdentificacion = document.getElementById(
-    "formularioIdentificacion"
-  );
-let contenedorIdentificacion = document.getElementById(
-    "contenedorIdentificacion");
-let contenedorUsuario = document.getElementById("contenedorUsuario");
-let textoUsuario = document.getElementById("textoUsuario");
-let inputUsuario = document.getElementById("inputUsuario");
+//pintar dom
+let magia2 = document.getElementById("magia2")
 
 
 cargarEventos();
@@ -27,7 +17,10 @@ function cargarEventos(){
 
     //Cuando se elimina productos del carrito
     carrito.addEventListener('click', (e)=>{carro.eliminarProducto(e)});
+// dom
+//  carro.pintarDom();
 
+//calcular total
     carro.calcularTotal();
 
     //Al cargar documento se muestra lo almacenado en LS
@@ -40,10 +33,5 @@ function cargarEventos(){
      //Al vaciar carrito
      vaciarCarritoBtn.addEventListener('click', (e)=>{carro.vaciarCarrito(e)});
     
-     //Vaciar LS
-     limpiarStorage.addEventListener("click", (e)=>{carro.vaciarLocalStorage(e)});
-
-     // usuario
-    //  formularioIdentificacion.addEventListener( "onsubmit", (e) =>{ identificarUsuario(e)});
- 
+    
   }
