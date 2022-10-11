@@ -282,31 +282,6 @@ obtenerEvento(e) {
   listaCompra.innerHTML="";
   this.calcularTotal()
   }
-
- //usuario
-//  identificarUsuario(e){
-//   e.preventDefault()
-//   usuario = inputUsuario.value;
-//   formularioIdentificacion.reset();
-//   this.actualizarUsuarioStorage();
-//   this.mostrarTextoUsuario();
-//  }
-//  actualizarUsuarioStorage() {
-//   localStorage.setItem("usuario", usuario);
-// }
-//  mostrarTextoUsuario() {
-//   contenedorIdentificacion.hidden = true;
-//   contenedorUsuario.hidden = false;
-//   textoUsuario.innerHTML += ` ${usuario}`;
-// }
-//  mostrarFormularioIdentificacion() {
-//   contenedorIdentificacion.hidden = false;
-//   contenedorUsuario.hidden = true;
-//   textoUsuario.innerHTML = ``;
-// }
-
-
-
 }
 
 
