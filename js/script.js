@@ -1,5 +1,4 @@
 
-
  //pintar dom
  async function consultarProductosServer(){
   try {
@@ -34,10 +33,6 @@ consultarProductosServer();
 
 
 class carritos{
- 
-     
-  
-
   //para añadir al carrito
       comprarProducto(e){
         

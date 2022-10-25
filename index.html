@@ -8,24 +8,21 @@
     <!-- link css -->
     <link rel="stylesheet" href="style.css">
 
-   
-  
     <!--lick boot -->
-    
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
 </head>
 <body>
   <div class="row">
-    
   <h1>Pedidos</h1>
   <div class="flex">
     <div class="pedir" id="lista-productos">
+      <!--para agregar los productos-->
       <div id="magia2">
-        
       </div>
     </div>
-
-    <div id="carrito" class="form-group table-responsive" >
+    <div id="carrito" class="form-group" >
+      <!--tabla para agregar la compra y total-->
       <table class="table" id="lista-compra" >
         <thead>
           <tr>
@@ -38,33 +35,28 @@
           </tr>
         </thead>
         <tbody >
-
         </tbody>
-          
         <tr>
           <th colspan="4" scope="col" class="text-right">TOTAL :</th>
           <th scope="col">
               <input id="total" name="monto" class="font-weight-bold border-0" readonly style="background-color: white;"></input>
           </th>
         </tr>
-
       </table>
       <div class="row justify-content-between">
-
+        <!--vaciar o terminar compra-->
         <div class="d-flex justify-content-between">
               <a href="#" id="vaciar-carrito" class="btn btn-primary ">Vaciar Carrito</a>
               <button href="#" class="btn btn-success btn-block" id="procesar-compra">Realizar compra</button>
-        </div>
-                            
+        </div>                  
       </div>
     </div>
-
   </div>
 
   <!-- boot js -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-  <!-- js -->
 
+  <!-- js -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.37/dist/sweetalert2.all.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/carro.js"></script> 
