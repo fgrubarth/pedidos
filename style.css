@@ -5,7 +5,9 @@ h1{
 .flex{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    
 }
 
 .contenedor{
@@ -13,14 +15,12 @@ h1{
     margin: 10px;
 }
 .carro{
-   
-    
     width: 50%;
 }
 .pedidos{
     display: flex;
     justify-content: space-between;
-    padding-right: 10px;
+    
 }
 
 .magia{
@@ -39,5 +39,30 @@ h1{
     max-width: 80px;
     border-radius: 20px;
   }
+
+
+  .foto{
+    width: 50%;
+  }
+
+ 
+ .tabla{
+    max-width: 100%;
+    
+ }
+ @media (max-width: 700px) { 
+
+    tr{
+        display: flex;
+        flex-direction: column;  
+      }
+      th{
+        margin: 5px;
+      }
+      table{
+        display: flex;
+      }
+  }
+ 
 
   

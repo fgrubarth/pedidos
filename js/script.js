@@ -79,7 +79,7 @@ insertarCarrito(producto){
   const row = document.createElement('tr');
   row.innerHTML = `
       <td>
-          <img src="${producto.imagen}" width=100>
+          <img src="${producto.imagen}" width=60>
       </td>
       <td>${producto.titulo}</td>
       <td>${producto.precio}</td>
