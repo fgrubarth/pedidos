@@ -54,10 +54,14 @@ h1{
 
     tr{
         display: flex;
-        flex-direction: column;  
+        flex-direction: column;   
+      }
+      .fila{
+        display:none;
       }
       th{
         margin: 5px;
+        
       }
       table{
         display: flex;
